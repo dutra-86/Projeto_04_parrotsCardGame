@@ -5,28 +5,63 @@ body{
 .title{
     font-size: 56px;
     font-style: normal;
-    font-weight: 700px;
+    font-weight: 700;
     color: #75B79E;
     margin-top: 40px;
     text-align: center;
 }
-.carta{
-    background-color: #A7E9AF;
-    border-radius: 5px;
-    height: 146px;
-    width: 117px;
+.content{
+    padding-top: 116px;
 }
-.carta img{
+.mesa{
+    width: 80%;
+    margin-left: 20%;
+    transform: translate(-10%, 0);
+    margin-top: 200px;
+    display: flex;
+    justify-content: space-around;
+}
+.carta{
+    position: relative;
+}
+.back img{
     margin-top: 24px;
     margin-left: 10px;
     height: 100px;
     width: 100px;
 }
-.mesa{
-    width: 100%;
-    padding-top: 150px;
-    padding-left: 116px;
-    padding-right: 116px;
+.front img{
+    top: 0px;
+    margin-left: 10px;
+    height: 100px;
+    width: 100px;
+}
+.face{
+    height: 146px;
+    width: 117px;
+    background-color: #A7E9AF;
+    border: 3px #99CEA8;
+    box-sizing: border-box;
+    border-radius: 5px;
+    box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.3);
     display: flex;
-    justify-content: space-between;
+    align-items: center;
+    justify-content: center;
+
+    position: absolute;
+
+    backface-visibility: hidden;
+    transition: all .5s;
+    transform-style: preserve-3d;
+}
+.front{
+    transform: rotateY(180deg);
+}
+
+.virada .front{
+    transform: rotateY(0deg);
+}
+
+.virada .back{
+    transform: rotateY(-180deg);
 }
