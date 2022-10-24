@@ -1,7 +1,7 @@
 function venceu(){
     document.querySelector(".primeira").innerHTML = '';
     document.querySelector(".segunda").innerHTML = '';
-    alert("Parabéns, você venceu!");
+    alert(`Parabéns, você venceu em ${timerRef.innerHTML} segundos!`);
     let again = '';
     while (again != 'sim'){
         again = prompt("Deseja jogar novamente? (sim/nao)");
@@ -10,6 +10,9 @@ function venceu(){
         }
     }
     if (again == 'sim'){
+        seconds = 0;
+        minutes = 0;
+        clearInterval(contando);
         game();
     }
 }
@@ -45,6 +48,26 @@ let contador_acertos = 0;
 let cartas_selecionadas=[];
 let qtd_cartas = 0;
 
+let [seconds, minutes] = [0,0];
+let timerRef = document.querySelector('.relogio');
+let int = null;
+
+function displayTimer(){
+    seconds ++;
+    if (seconds == 60){
+        seconds = 0;
+        minutes ++;
+    }
+    let seconds_fixed = seconds.toLocaleString('en-US', {
+        minimumIntegerDigits: 2,
+        useGrouping: false
+      })
+    let minutes_fixed = minutes.toLocaleString('en-US', {
+    minimumIntegerDigits: 2,
+    useGrouping: false
+    })
+    timerRef.innerHTML = `${minutes_fixed} : ${seconds_fixed}`;
+}
 function game(){
     qtd_cartas = 0;
     contador_acertos = 0;
@@ -53,6 +76,8 @@ function game(){
     while(qtd_cartas < 4 || qtd_cartas > 14 || qtd_cartas%2==1){
         qtd_cartas = prompt("Insira a quantidade de cartas (número par entre 4 e 14)");
     }
+
+    contando = setInterval(displayTimer, 1000);
 
     allcards = ['bobross', 'explody', 'fiesta', 'metal', 'revertit', 'triplets', 'unicorn'];
     baralho = [];
